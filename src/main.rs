@@ -9,12 +9,13 @@ fn main() {
     // println!は、文字列をコンソールに出力するマクロ
     println!("Guess the number!");
 
+    // rand::thread_rng()は、スレッドごとの乱数生成器を返す関数です。
+    // gen_range(1..=100)は、1から100までの範囲の乱数を生成するメソッドです。
+    // 生成した乱数をsecret_numberに代入しています。
     let secret_number = rand::thread_rng().gen_range(1..=100);
 
     loop {
-        // rand::thread_rng()は、スレッドローカルな乱数生成器を返す関数です。
-        // gen_range(1..=100)は、1から100までの範囲の乱数を生成するメソッドです。
-        // randで作成した変数をsecret_numberに代入している
+        // プレイヤーに予想した数字の入力をうながします。
         println!("Please input your guess.");
 
         // String::new()は、空の文字列を作成する関数です。
@@ -28,6 +29,8 @@ fn main() {
             // ok値の場合は、読み込んだ行の数を返します。
             .expect("Failed to read line");
 
+        // trim()で改行を取り除き、parse()で文字列を数値に変換します。
+        // 数値に変換できなかったときはcontinueで次のループに進みます。
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
